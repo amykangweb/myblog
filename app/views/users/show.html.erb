@@ -2,10 +2,37 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
+<%= link_to gravatar_for(@user, size: 52), @user %>
+<h1>
+  <%= @user.name %>
+</h1>
+<span>
+  <%= link_to "view my profile", @user %>
+</span>
+<span>
+  <%= pluralize(@user.posts.count, "post") %>
+</span>
     </section>
   </aside>
+    <div class="span8">
+    <% if @user.posts.any? %>
+      <h3><%= @user.name %>'s Blog Posts (<%= @user.posts.count %>)</h3>
+      <ol class="microposts">
+	  <% @posts.each do |post| %>
+        <%= link_to post.title, post_path(post) %><p>
+		<%= post.content %><br>
+		Posted <%= time_ago_in_words(post.created_at) %> ago.  
+		<% if current_user?(post.user) || current_user.admin? %>
+		  |  <%= link_to "delete", post, method: :delete, data: {confirm: "are you sure?"}, title: post.title %>
+		<% end %><p>
+		<% end %>
+      </ol>
+      <%= will_paginate @posts %>
+	  <% else %>
+	  <h3>Blog Posts (0)</h3>
+	  <ol class="microposts">
+	  <%= "No Posts" %>
+	  </ol>
+    <% end %>
+  </div>
 </div>

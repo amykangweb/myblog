@@ -23,10 +23,17 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    if signed_in?
+    @posts = @user.posts.paginate(page: params[:page])
+    end
   end
 
   def new
   	@user = User.new
+    if signed_in?
+      flash[:notice] = "You are already signed in."
+      redirect_to current_user
+    end
   end
 
   def create
@@ -54,13 +61,6 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_url) unless current_user.admin?
-  end
-
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to signin_url, notice: "Please sign in."
-    end
   end
 
   def correct_user

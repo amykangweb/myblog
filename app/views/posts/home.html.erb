@@ -1,0 +1,23 @@
+<div class="center hero-unit">
+  <h1>Welcome to MyBlog</h1>
+
+  <h2>
+    Create a free blog today!
+    <a href="http://railstutorial.org/">Ruby on Rails 
+
+Tutorial</a>
+  </h2>
+
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %><br>
+  <small>or <%= link_to "Sign In", signin_path %></small>
+</div>
+
+<% @posts.each do |post| %>
+<%= link_to post.title, post_path(post) %><p>
+<%= post.content %><br>
+<%= link_to "Read more...", post_path(post) %><p>
+<% end %>
+
+<%= link_to image_tag("rails.png", alt: "Rails"), 
+
+'http://rubyonrails.org/' %>
