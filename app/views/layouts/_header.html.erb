@@ -13,7 +13,8 @@
                 Account <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Profile", current_user %></li>
+				<li><%= link_to "Dashboard", dash_path %></li>
+                <li><%= link_to "My Blog", current_user %></li>
 				<li><%= link_to "Create Post", new_post_path %></li>
 				<li><%= link_to "Subscribed Blogs", sub_path %></li>
                 <li><%= link_to "Settings", edit_user_path(current_user) %></li>

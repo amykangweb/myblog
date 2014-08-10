@@ -4,6 +4,7 @@ Myblog::Application.routes.draw do
   resources :posts
   root 'posts#home'
   
+  match '/dash', to: 'users#dash', via: 'get'
   match '/sub', to: 'static_pages#sub', via: 'get'
   match '/signup', to: 'users#new', via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'

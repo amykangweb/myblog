@@ -1,3 +1,4 @@
+<% if feed_item.user != current_user %>
 <li id="<%= feed_item.id %>">
   <%= link_to gravatar_for(feed_item.user), feed_item.user %>
   <span class="user">
@@ -9,3 +10,8 @@
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
   </span>
 </li>
+<% else %>
+<li>
+<%= "No Posts" %>
+</li>
+<% end %>

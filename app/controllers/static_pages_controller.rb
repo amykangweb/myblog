@@ -6,10 +6,6 @@ def sub
    end
 end
 
-def home
-	
-end
-
 def help
 end
 

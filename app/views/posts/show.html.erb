@@ -6,15 +6,17 @@
 <h1>
   <%= @post.user.name %>
 </h1>
+<% if current_user?(@post.user) %>
 <span>
   <%= link_to "view my profile", @post.user %>
 </span>
+<% end %>
 <span>
   <%= pluralize(@post.user.posts.count, "post") %>
 </span>
 <span class="newpost">
 <% if current_user?(@post.user) %>
-<%= link_to "Create New Posts", new_post_path %>
+<%= link_to "Create New Post", new_post_path %>
 <% end %>
 </span>
     </section>

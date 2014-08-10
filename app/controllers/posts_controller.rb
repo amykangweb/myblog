@@ -3,7 +3,8 @@ class PostsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def home
-    @posts = Post.all(limit: 6)
+    @post = Post.where(:private => nil)
+    @posts = @post.all(limit: 6)
   end
 
   def show

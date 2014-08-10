@@ -1,0 +1,29 @@
+<% provide(:title, "Dashboard") %>
+<div class="row">
+  <aside class="span4">
+    <section>
+<%= render 'shared/user_info' %>
+</span>
+    </section>
+  </aside>
+    <div class="span8">
+    <% if @posts.any? %>
+      <h3><%= @user.name %>'s Dashboard (<%= @posts.count %>)</h3>
+      <ol class="microposts">
+	  <% @posts.each do |post| %>
+        <%= link_to post.title, post_path(post) %>&nbsp;&nbsp;<% if post.private === true %><em>Private</em><% end %><br>
+		Posted <%= time_ago_in_words(post.created_at) %> ago.  
+		<% if current_user?(post.user) || current_user.admin? %>
+		  |  <%= link_to "delete", post, method: :delete, data: {confirm: "are you sure?"}, title: post.title %><p>
+		<% end %>
+		<% end %>
+      </ol>
+      <%= will_paginate @posts %>
+	  <% else %>
+	  <h3><%= @user.name %>'s Dashboard (0)</h3>
+	  <ol class="microposts">
+	  <%= "No Posts" %>
+	  </ol>
+    <% end %>
+  </div>
+</div>

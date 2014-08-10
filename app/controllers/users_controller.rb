@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :signed_in_user, only: [:index, :edit, :update, :dash]
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
+
+  def dash
+    @user = User.find_by(params[:id])
+    @posts = @user.posts.paginate(page: params[:page])
+  end
 
   def index
     @users = User.paginate(page: params[:page])
@@ -22,10 +27,9 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@user = User.find(params[:id])
-    if signed_in?
-    @posts = @user.public.paginate(page: params[:page])
-    end
+      @user = User.find(params[:id])
+      @all = @user.posts.where(:private => nil)
+      @posts = @all.paginate(page: params[:page])
   end
 
   def new
