@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     if signed_in?
-    @posts = @user.posts.paginate(page: params[:page])
+    @posts = @user.public.paginate(page: params[:page])
     end
   end
 

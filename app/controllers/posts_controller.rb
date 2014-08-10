@@ -25,6 +25,20 @@ class PostsController < ApplicationController
   	end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      flash[:success] = "Your post has been updated."
+      redirect_to @post
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
   	@post.destroy
   	redirect_to current_user
@@ -33,7 +47,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-  	params.require(:post).permit(:title, :content)
+  	params.require(:post).permit(:title, :content, :private)
   end
 
   def correct_user

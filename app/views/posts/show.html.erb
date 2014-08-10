@@ -12,10 +12,15 @@
 <span>
   <%= pluralize(@post.user.posts.count, "post") %>
 </span>
+<span class="newpost">
+<% if current_user?(@post.user) %>
+<%= link_to "Create New Posts", new_post_path %>
+<% end %>
+</span>
     </section>
   </aside>
 <div class="span8">
-<h3><%= @post.title %></h3>
+<h3><%= @post.title %></h3> <span><% if @post.private === true %><em>Private Post</em><% end %></span>
   <span class="content"><%= @post.content %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(@post.created_at) %> ago.<p>
