@@ -12,9 +12,9 @@
       <ol class="microposts">
 	  <% @posts.each do |post| %>
         <%= link_to post.title, post_path(post) %>&nbsp;&nbsp;<% if post.private === true %><em>Private</em><% end %><br>
-		Posted <%= time_ago_in_words(post.created_at) %> ago.  
+		Posted <%= time_ago_in_words(post.created_at) %> ago.<br>  
 		<% if current_user?(post.user) || current_user.admin? %>
-		  |  <%= link_to "delete", post, method: :delete, data: {confirm: "are you sure?"}, title: post.title %><p>
+		 <%= link_to "edit", edit_post_path(post) %>  |  <%= link_to "delete", post, method: :delete, data: {confirm: "are you sure?"}, title: post.title %><p>
 		<% end %>
 		<% end %>
       </ol>

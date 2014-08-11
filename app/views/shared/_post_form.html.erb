@@ -1,7 +1,13 @@
 <%= form_for @post do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <div class="field">
-<%= f.text_area :content, placeholder: "Compose new post..." %>
+<%= f.text_field :title, placeholder: "Post title..." %>
+</div>
+<div class="field">
+<%= f.text_area :content, placeholder: "Compose new post...", class: "postcontent" %>
+</div>
+<div class="checkbox">
+<strong>Private</strong>  <%= f.check_box :private %>  <em>(Check this box to make this post private.)</em>
 </div>
 <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
