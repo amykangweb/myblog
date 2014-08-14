@@ -12,7 +12,7 @@
 </span>
 <% end %>
 <span>
-  <%= pluralize(@post.user.posts.count, "post") %>
+  <%= pluralize(@all.count, "post") %>
 </span>
 <span class="newpost">
 <% if current_user?(@post.user) %>
@@ -25,10 +25,15 @@
 <h3><%= @post.title %></h3> <span><% if @post.private === true %><em>Private Post</em><% end %></span>
   <span class="content"><%= @post.content %></span>
   <span class="timestamp">
-    Posted <%= time_ago_in_words(@post.created_at) %> ago.<p>
+    Posted by <strong><%= link_to @post.user.name, @post.user %></strong> <%= time_ago_in_words(@post.created_at) %> ago.<p>
 	<% if current_user?(@post.user) || current_user.admin? %>
 	<%= link_to "edit", edit_post_path %>&nbsp;&nbsp;|&nbsp;&nbsp;
 	<%= link_to "delete", @post, method: :delete, data: {confirm: "are you sure?"}, title: @post.title %>
 	<% end %>
   </span>
+  <h3 class="comments_title">Comments (<%= @post.comments.count %>)</h3>
+  <%= render @post.comments %><p>
+  <div class="comment_form">
+  <%= render 'shared/comments_form' %><p>
+  </div>
   </div>

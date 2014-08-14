@@ -3,12 +3,14 @@ class PostsController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def home
-    @post = Post.where(:private => nil)
+    @post = Post.where(:private => false)
     @posts = @post.all(limit: 6)
   end
 
   def show
   	@post = Post.find(params[:id])
+    @user = @post.user
+    @all = @user.posts.where(:private => false)
   end
 
   def new
@@ -22,7 +24,7 @@ class PostsController < ApplicationController
   		redirect_to current_user
   	else
       @feed_items = []
-  		render 'users/show'
+  		render 'show'
   	end
   end
 

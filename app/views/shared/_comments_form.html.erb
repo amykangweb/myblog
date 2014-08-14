@@ -1,0 +1,7 @@
+<%= form_for([@post, @post.comments.build]) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+<div class="field">
+<%= f.text_area :body, placeholder: "Add Comment...", class: "commentfield" %>
+</div>
+<%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>

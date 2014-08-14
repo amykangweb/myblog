@@ -4,6 +4,9 @@
       <%= link_to "MyBlog", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
+		<% if signed_in? %>
+		  <li class="username">Hello, <%= current_user.name %>!</li>
+		  <% end %>
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", help_path %></li>
           <% if signed_in? %>

@@ -1,0 +1,8 @@
+<span class="timestamp">Posted by <strong><%= link_to comment.user.name, comment.user %></strong>  <span><%= time_ago_in_words(comment.created_at) %> ago.</span><br>
+<span class="comment_body"><%= comment.body %></span><br>
+<% if current_user?(@post.user) %>
+<%= link_to "delete", [comment.post, comment], method: :delete, data: {confirm: "are you sure?"} %>
+<% end %>
+
+
+

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def dash
     @user = User.find_by(params[:id])
-    @posts = @user.posts.paginate(page: params[:page])
+    @posts = current_user.posts.paginate(page: params[:page])
   end
 
   def index
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def show
       @user = User.find(params[:id])
-      @all = @user.posts.where(:private => nil)
+      @all = @user.posts.where(:private => false)
       @posts = @all.paginate(page: params[:page])
   end
 
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   end
 
   def correct_user
-    @user = User.find(params[:id])
+    @user = User.find_by(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
 

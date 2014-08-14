@@ -92,12 +92,17 @@ p {
   text-decoration: none;
 }
 
+.username{
+	color: #fff;
+	font-weight: bold;
+	padding-top: 10px;
+}
+
 /* footer */
 
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
   color: #999;
 }
 
@@ -190,6 +195,26 @@ input {
 
 .postcontent {
 height: 350px;
+}
+
+.title{
+margin-top: 20px;
+}
+
+.comment_form{
+	margin-top: 30px;
+.commentfield{
+	height: 125px;
+}
+}
+
+.comments_title{
+	color: #323232;
+	margin-top: 50px;
+}
+
+.comment_body{
+	color: #323232;
 }
 
 /* Users index */

@@ -7,9 +7,10 @@ class User < ActiveRecord::Base
 	has_secure_password
 	validates :password, length: {minimum: 6}
 	has_many :posts, dependent: :destroy
+	has_many :comments, dependent: :destroy
 
 	def feed
-		Post.where("user_id =?", id).where(:private => nil)
+		Post.where("user_id =?", id).where(:private => false)
 	end
 
 	def User.new_remember_token

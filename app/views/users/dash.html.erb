@@ -2,17 +2,28 @@
 <div class="row">
   <aside class="span4">
     <section>
-<%= render 'shared/user_info' %>
+<%= link_to gravatar_for(current_user, size: 52), current_user %>
+<h1>
+  <%= current_user.name %>
+</h1>
+<span>
+  <%= link_to "view my profile", current_user %>
+</span>
+<span>
+  <%= pluralize(current_user.posts.count, "post") %>
+</span>
+<span class="newpost">
+<%= link_to "Create New Post", new_post_path %>
 </span>
     </section>
   </aside>
     <div class="span8">
     <% if @posts.any? %>
-      <h3><%= @user.name %>'s Dashboard (<%= @posts.count %>)</h3>
+      <h3><%= current_user.name %>'s Dashboard (<%= current_user.posts.count %>)</h3>
       <ol class="microposts">
 	  <% @posts.each do |post| %>
-        <%= link_to post.title, post_path(post) %>&nbsp;&nbsp;<% if post.private === true %><em>Private</em><% end %><br>
-		Posted <%= time_ago_in_words(post.created_at) %> ago.<br>  
+        <strong><%= link_to post.title, post_path(post) %></strong>&nbsp;&nbsp;<% if post.private === true %><em>Private</em><% end %><br>
+		<span class="timestamp">Posted <%= time_ago_in_words(post.created_at) %> ago. <%= link_to "#{post.comments.count} Comments >>", post_path(post) %></span><br>  
 		<% if current_user?(post.user) || current_user.admin? %>
 		 <%= link_to "edit", edit_post_path(post) %>  |  <%= link_to "delete", post, method: :delete, data: {confirm: "are you sure?"}, title: post.title %><p>
 		<% end %>
